@@ -89,6 +89,11 @@
     cell.profileView.image = nil;
     [cell.profileView setImageWithURL:profileURL];
     
+    [cell.retweetButton setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
+    [cell.retweetButton setImage:[UIImage imageNamed:@"retweer-icon-green"] forState:UIControlStateSelected];
+    [cell.favoriteButton setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
+    [cell.favoriteButton setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
+    
     return cell;
 }
     

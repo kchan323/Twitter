@@ -20,5 +20,10 @@
 
     // Configure the view for the selected state
 }
-
+    
+- (IBAction)didTapLike:(id)sender {
+    self.tweet.favorited = YES;
+    self.tweet.favoriteCount += 1;
+}
+    
 @end
