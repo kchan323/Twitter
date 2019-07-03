@@ -29,7 +29,7 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 150;
+    //self.tableView.rowHeight = 150;
     
     self.tweetsArray = [[NSMutableArray alloc] init];
     [self fetchTweets];
@@ -84,7 +84,9 @@
     User *user = tweet.user;
     
     cell.authorLabel.text = user.name;
-    cell.userLabel.text = user.screenName;
+    NSString *at = @"@";
+    NSString *username = [at stringByAppendingString:user.screenName];
+    cell.userLabel.text = username;
     cell.dateLabel.text = tweet.createdAtString;
     cell.tweetLabel.text = tweet.text;
     

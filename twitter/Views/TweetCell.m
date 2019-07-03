@@ -84,8 +84,4 @@
     }
 }
     
-- (void) refreshData {
-    
-}
-    
 @end
