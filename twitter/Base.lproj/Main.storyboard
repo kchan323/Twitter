@@ -117,6 +117,9 @@
                                                     <state key="normal" image="retweet-icon">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="didTapRetweet:" destination="1ge-d6-6lP" eventType="touchUpInside" id="gh7-Nr-wlI"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t6R-qu-WG4">
                                                     <rect key="frame" x="236" y="109" width="30" height="30"/>
@@ -128,14 +131,30 @@
                                                         <action selector="didTapLike:" destination="1ge-d6-6lP" eventType="touchUpInside" id="v8t-4V-7eT"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Retweet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LgH-qm-8Fz">
+                                                    <rect key="frame" x="158" y="114" width="63" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Favorite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fx-7W-Opp">
+                                                    <rect key="frame" x="274" y="114" width="61" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="authorLabel" destination="SOq-bN-RNM" id="UJr-5p-org"/>
                                             <outlet property="dateLabel" destination="qn4-bq-rIK" id="CDb-PT-iTf"/>
                                             <outlet property="favoriteButton" destination="t6R-qu-WG4" id="yVB-Ow-r30"/>
+                                            <outlet property="favoriteLabel" destination="5fx-7W-Opp" id="D3R-cb-jl9"/>
                                             <outlet property="profileView" destination="hma-tw-hwv" id="J0x-wV-nX9"/>
                                             <outlet property="retweetButton" destination="Wsu-GI-8Ti" id="O0P-m4-W0k"/>
+                                            <outlet property="retweetLabel" destination="LgH-qm-8Fz" id="68i-yz-gka"/>
                                             <outlet property="tweetLabel" destination="bEv-k0-JRo" id="53y-Wz-KkR"/>
                                             <outlet property="userLabel" destination="npa-8t-Fgs" id="VBo-OD-Lut"/>
                                         </connections>
