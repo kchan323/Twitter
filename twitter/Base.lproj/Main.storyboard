@@ -227,15 +227,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Type Tweet" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HDv-ld-GTa">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Type Tweet" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HDv-ld-GTa">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="HDv-ld-GTa" firstAttribute="top" secondItem="ePw-AG-y9x" secondAttribute="top" id="i1b-NP-B1D"/>
+                            <constraint firstAttribute="trailing" secondItem="HDv-ld-GTa" secondAttribute="trailing" id="jfX-sy-did"/>
+                            <constraint firstAttribute="bottom" secondItem="HDv-ld-GTa" secondAttribute="bottom" id="kPd-Oj-Rkm"/>
+                            <constraint firstItem="HDv-ld-GTa" firstAttribute="leading" secondItem="ePw-AG-y9x" secondAttribute="leading" id="qXx-QW-t6O"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="hXv-my-uyH"/>
                     </view>
                     <navigationItem key="navigationItem" id="HNf-j8-hSY">
