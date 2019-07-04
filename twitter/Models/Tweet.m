@@ -8,6 +8,7 @@
 
 #import "Tweet.h"
 #import "User.h"
+#import "DateTools.h"
 
 @implementation Tweet
 
@@ -35,20 +36,55 @@
         NSDictionary *user = dictionary[@"user"];
         self.user = [[User alloc] initWithDictionary:user];
         
-        // Format createdAt date string
         NSString *createdAtOriginalString = dictionary[@"created_at"];
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        // Configure the input format to parse the date string
-        formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
-        // Convert String to Date
-        NSDate *date = [formatter dateFromString:createdAtOriginalString];
-        // Configure output format
-        formatter.dateStyle = NSDateFormatterShortStyle;
-        formatter.timeStyle = NSDateFormatterNoStyle;
-        // Convert Date to String
-        self.createdAtString = [formatter stringFromDate:date];
+        self.createdAtString = [self formatDate:createdAtOriginalString];
+        
+        //original date formatting code
+        /*
+         // Format createdAt date string
+         NSString *createdAtOriginalString = dictionary[@"created_at"];
+         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+         // Configure the input format to parse the date string
+         formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
+         // Convert String to Date
+         NSDate *date = [formatter dateFromString:createdAtOriginalString];
+         // Configure output format
+         formatter.dateStyle = NSDateFormatterShortStyle;
+         formatter.timeStyle = NSDateFormatterNoStyle;
+         // Convert Date to String
+         self.createdAtString = [formatter stringFromDate:date];
+         */
     }
     return self;
+}
+
+-(NSString *)formatDate:(NSString *)origDate {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+        [formatter setDateFormat:@"E MMM d HH:mm:ss Z y"];
+        NSDate *convertedDate = [formatter dateFromString:origDate];
+        NSDate *todayDate = [NSDate date];
+        double ti = [convertedDate timeIntervalSinceDate:todayDate];
+        ti = ti * -1;
+        if(ti < 1) {
+            return @"never";
+        } else  if (ti < 60) {
+            return @"less than a min ago";
+            //return [NSString stringWithFormat:@"%d less than a min ago"];
+        } else if (ti < 3600) {
+            int diff = round(ti / 60);
+            return [NSString stringWithFormat:@"%d min ago", diff];
+        } else if (ti < 86400) {
+            int diff = round(ti / 60 / 60);
+            return[NSString stringWithFormat:@"%d hr ago", diff];
+        } else if (ti < INFINITY) {
+            formatter.dateStyle = NSDateFormatterShortStyle;
+            formatter.timeStyle = NSDateFormatterNoStyle;
+            return [formatter stringFromDate:convertedDate];
+        }
+        else {
+            return @"never";
+        }
 }
 
 + (NSMutableArray *)tweetsWithArray:(NSArray *)dictionaries{

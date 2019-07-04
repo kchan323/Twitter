@@ -13,6 +13,7 @@
 #import "ComposeViewController.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "DetailsViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -45,7 +46,7 @@
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             //self.tweetsArray = tweets;
-            [self.tableView reloadData];
+            //[self.tableView reloadData];
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             for (Tweet *tweet in tweets) {
                 [self.tweetsArray addObject:tweet];
@@ -56,8 +57,8 @@
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
+        [self.refreshControl endRefreshing];
     }];
-    [self.refreshControl endRefreshing];
 }
     
 - (void)didReceiveMemoryWarning {
@@ -71,9 +72,16 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    UINavigationController *navigationController = [segue destinationViewController];
-    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    composeController.delegate = self;
+    if([segue.identifier isEqualToString:@"detailSegue"]) {
+        TweetCell *tappedCell = sender;
+        DetailsViewController *detailsViewController =  [segue destinationViewController];
+        detailsViewController.tweet = tappedCell.tweet;
+    }
+    else {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+    }
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -87,7 +95,6 @@
     NSString *at = @"@";
     NSString *username = [at stringByAppendingString:user.screenName];
     cell.userLabel.text = username;
-    cell.dateLabel.text = tweet.createdAtString;
     cell.tweetLabel.text = tweet.text;
     
     NSURL *profileURL = [NSURL URLWithString:user.profilePicture];
@@ -101,6 +108,12 @@
     
     cell.retweetLabel.text = [NSString stringWithFormat:@"%d", tweet.retweetCount];
     cell.favoriteLabel.text = [NSString stringWithFormat:@"%d", tweet.favoriteCount];
+    
+    //NSDate *timeAgoDate = [NSDate dateWithTimeIntervalSinceNow:-5];
+    //NSLog(@"Time Ago: %@", timeAgoDate.shortTimeAgoSinceNow);
+    
+    cell.dateLabel.text = tweet.createdAtString;
+    //cell.dateLabel.text = [self dateDiff:tweet.createdAtString];
     
     return cell;
 }
