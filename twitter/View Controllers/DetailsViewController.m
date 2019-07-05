@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
+@property (weak, nonatomic) IBOutlet UILabel *retweetCount;
+@property (weak, nonatomic) IBOutlet UILabel *favoriteCount;
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (weak, nonatomic) IBOutlet UILabel *retweetLabel;
@@ -50,6 +52,12 @@
     self.favoriteLabel.text = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
     
     self.dateLabel.text = self.tweet.createdAtString;
+    
+    NSString *retweetNum = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
+    NSString *favoriteNum = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
+
+    self.retweetCount.text = [retweetNum stringByAppendingString:@" Retweets"];
+    self.favoriteCount.text = [favoriteNum stringByAppendingString:@" Likes"];
 }
     
 - (IBAction)didTapRetweet:(id)sender {
