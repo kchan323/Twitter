@@ -14,8 +14,9 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "DetailsViewController.h"
+#import "ProfileViewController.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, TweetCellDelegate>
 
 @property (strong, nonatomic) NSMutableArray *tweetsArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -77,6 +78,13 @@
         DetailsViewController *detailsViewController =  [segue destinationViewController];
         detailsViewController.tweet = tappedCell.tweet;
     }
+    else if([segue.identifier isEqualToString:@"profileSegue"]) {
+        //[self performSegueWithIdentifier:@"profileSegue" sender:user];
+        
+        //TweetCell *tappedCell = sender;
+        ProfileViewController *profileViewController =  [segue destinationViewController];
+        profileViewController.user = sender;
+    }
     else {
         UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
@@ -115,6 +123,8 @@
     cell.dateLabel.text = tweet.createdAtString;
     //cell.dateLabel.text = [self dateDiff:tweet.createdAtString];
     
+    cell.delegate = self;
+    
     return cell;
 }
     
@@ -123,8 +133,9 @@
 }
     
 - (void)didTweet:(Tweet *)tweet {
-    [self.tweetsArray addObject:tweet];
-    [self fetchTweets];
+    [self.tweetsArray insertObject:tweet atIndex:0];
+    [self.tableView reloadData];
+    //[self fetchTweets];
 }
 
 - (IBAction)logout:(id)sender {
@@ -134,6 +145,10 @@
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     appDelegate.window.rootViewController = loginViewController;
     [[APIManager shared] logout];
+}
+    
+- (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
 }
     
 @end

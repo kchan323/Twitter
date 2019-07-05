@@ -20,6 +20,7 @@
 		F91091D122CADD0F0042CC79 /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F91091D022CADD0F0042CC79 /* TweetCell.m */; };
 		F91091D422CC19950042CC79 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F91091D322CC19950042CC79 /* ComposeViewController.m */; };
 		F91091D722CD767B0042CC79 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F91091D622CD767B0042CC79 /* DetailsViewController.m */; };
+		F91091DA22CFC1090042CC79 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F91091D922CFC1090042CC79 /* ProfileViewController.m */; };
 		F9C86A1422CACA5100015BE6 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C86A1322CACA5100015BE6 /* User.m */; };
 		F9C86A1722CACB6F00015BE6 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C86A1622CACB6F00015BE6 /* Tweet.m */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,8 @@
 		F91091D322CC19950042CC79 /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		F91091D522CD767B0042CC79 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		F91091D622CD767B0042CC79 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		F91091D822CFC1090042CC79 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		F91091D922CFC1090042CC79 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		F9C86A1222CACA5100015BE6 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		F9C86A1322CACA5100015BE6 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		F9C86A1522CACB6F00015BE6 /* Tweet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 				F91091D322CC19950042CC79 /* ComposeViewController.m */,
 				F91091D522CD767B0042CC79 /* DetailsViewController.h */,
 				F91091D622CD767B0042CC79 /* DetailsViewController.m */,
+				F91091D822CFC1090042CC79 /* ProfileViewController.h */,
+				F91091D922CFC1090042CC79 /* ProfileViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 				6AD2790620BCC0380085BC29 /* LoginViewController.m in Sources */,
 				6AD278DA20BC4B950085BC29 /* AppDelegate.m in Sources */,
 				6AD278F620BCB68B0085BC29 /* APIManager.m in Sources */,
+				F91091DA22CFC1090042CC79 /* ProfileViewController.m in Sources */,
 				6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
