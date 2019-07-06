@@ -8,26 +8,33 @@
 
 #import "ProfileViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "APIManager.h"
+#import "UserTweetCell.h"
+#import "Tweet.h"
 
-
-@interface ProfileViewController ()
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource>
     
 @property (weak, nonatomic) IBOutlet UIImageView *backdropView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileView;
-    @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
-    @property (weak, nonatomic) IBOutlet UILabel *userLabel;
-    @property (weak, nonatomic) IBOutlet UILabel *bioLabel;
-    @property (weak, nonatomic) IBOutlet UILabel *tweetCount;
-    @property (weak, nonatomic) IBOutlet UILabel *followingCount;
-    @property (weak, nonatomic) IBOutlet UILabel *followersCount;
+@property (weak, nonatomic) IBOutlet UILabel *authorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bioLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tweetCount;
+@property (weak, nonatomic) IBOutlet UILabel *followingCount;
+@property (weak, nonatomic) IBOutlet UILabel *followersCount;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *tweets;
     
-
 @end
 
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.rowHeight = 150;
     
     self.authorLabel.text = self.user.name;
     NSString *at = @"@";
@@ -46,8 +53,23 @@
     self.tweetCount.text = [self.user.tweetCount stringByAppendingString:@" Tweets"];
     self.followingCount.text = [self.user.followingCount stringByAppendingString:@" Following"];
     self.followersCount.text = [self.user.followersCount stringByAppendingString:@" Followers"];
+    
+    [self fetchTweets];
 }
 
+- (void)fetchTweets {
+    // Get timeline
+    NSDictionary *param = @{@"screen_name": self.user.screenName};
+    [[APIManager shared] getUserTimelineWithParam:param WithCompletion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            self.tweets = tweets;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"😫😫😫 Error getting tweet: %@", error.localizedDescription);
+        }
+    }];
+}
+    
 /*
 #pragma mark - Navigation
 
@@ -58,4 +80,14 @@
 }
 */
 
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    UserTweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserTweetCell"];
+    [cell setTweet: self.tweets[indexPath.row]];
+    return cell;
+}
+    
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.tweets.count;
+}
+    
 @end
